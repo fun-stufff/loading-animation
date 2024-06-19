@@ -1,0 +1,79 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    position: relative;
+    width: 75vmin;
+    height: 75vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: rgb(255, 255, 255);
+    /* So bacground color won't be taken account for overlay mode */
+    isolation: isolate;
+    animation: text-opacity 4s ease-in-out infinite alternate;
+}
+
+/* Jadiin before and after klo ga mau bikin element baru (downside: cuma bisa 2 warna)*/
+.spinner-sector {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 15px solid transparent;
+    border-radius: 50%;
+    mix-blend-mode: overlay;
+    animation: rotate var(--duration) var(--timing-function) infinite;
+}
+
+.spinner-sector-red {
+    border-top-color: lightcoral;
+    --duration: 2.5s;
+    --timing-function: ease-in-out;
+}
+
+.spinner-sector-blue {
+    border-left-color: lightskyblue;
+    --duration: 1.5s;
+    --timing-function: ease-out;
+}
+
+.spinner-sector-green {
+    border-right-color: lightgreen;
+    --duration: 2s;
+    --timing-function: ease-in;
+}
+
+/* For animation */
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes text-opacity{
+    0%, 100% {
+        color: rgba(255, 255, 255, .8);
+      }
+    
+    25%, 75% {
+    color: rgba(255, 255, 255, .5);
+    }
+
+    50% {
+    color: rgba(255, 255, 255, .1);
+    }
+}
